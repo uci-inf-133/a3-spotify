@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumPageComponent } from './album-page.component';
 
@@ -6,12 +6,12 @@ describe('AlbumPageComponent', () => {
   let component: AlbumPageComponent;
   let fixture: ComponentFixture<AlbumPageComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ AlbumPageComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlbumPageComponent);
