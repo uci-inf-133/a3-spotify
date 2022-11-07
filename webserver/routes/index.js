@@ -95,6 +95,11 @@ router.get('*', function(req, res, next) {
 	}
 });
 
+router.get('/', function(req, res, next) {
+	res.writeHead(200);
+	res.end("Proxy Server is Running!");
+});
+
 router.get('/login', function(req, res, next) {
 	var scopes = 'user-read-private user-read-email';
 	res.redirect('https://accounts.spotify.com/authorize' +
