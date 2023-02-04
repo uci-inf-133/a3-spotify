@@ -79,25 +79,29 @@ router.get('*', function(req, res, next) {
 		//This chains two promises together. First, client_secret.json will be read and parsed. Once it completes, tokens.json will be read and parsed.
 		//Promise.all() could be used to conduct these two file reads asynchronously, which is more efficient.
 		fs.readFile('client_secret.json', (err, data) => {
-			data = JSON.parse(data);
-			my_client_id = data.client_id;
-			my_client_secret = data.client_secret;
-			fs.readFile('tokens.json', (err, data) => {
-			data = JSON.parse(data);
-			access_token = data.access_token;
-			refresh_token = data.refresh_token;
-			next();
-			});
-		});
-	}
-	else {
+			if(err){
+				console.log(err + "\n\nHave you created your tokens and client_secret files yet?")
+			}else{
+				data = JSON.parse(data);
+				my_client_id = data.client_id;
+				my_client_secret = data.client_secret;
+				
+				fs.readFile('tokens.json', (err, data) => {
+					data = JSON.parse(data);
+					access_token = data.access_token;
+					refresh_token = data.refresh_token;
+					next();
+				});
+			}
+		})
+	} else {
 		next();
 	}
 });
 
 router.get('/', function(req, res, next) {
 	res.writeHead(200);
-	res.end("Proxy Server is Running!");
+	res.end("Proxy Server is Running!, visit localhost:4200 to view your web app.");
 });
 
 router.get('/login', function(req, res, next) {
