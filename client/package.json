@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.0.0",
+  "version": "0.0.2023",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.9",
-    "@angular/cli": "~13.1.2",
     "@angular/compiler-cli": "~13.1.0",
     "@types/chroma-js": "^2.1.3",
     "@types/jasmine": "~3.10.0",
