@@ -62,17 +62,21 @@ function makeAPIRequest(url, res) {
 					});
 				});
 			} else {
+				console.log("THEN");
 				console.log(response);
 				res.status(response.status).end();
 			}
 			return null;
 		}
 	}).then(json => {
+		console.log("then then");
 		res.json(json);
 	}).catch(err => {
+		console.log("Catch");
 		console.error(err);
 	});
 }
+
 
 router.get('*', function(req, res, next) {
 	if(!loadedFiles) {
@@ -105,7 +109,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-	var scopes = 'user-read-private user-read-email';
+	var scopes = 'user-read-private user-read-email user-top-read';
 	res.redirect('https://accounts.spotify.com/authorize' +
 	  '?response_type=code' +
 	  '&client_id=' + my_client_id +
@@ -150,6 +154,14 @@ router.get('/callback', function(req, res, next) {
 
 router.get('/me', function(req, res, next) {
 	makeAPIRequest('https://api.spotify.com/v1/me', res);
+});
+
+router.get('/me/top/tracks', function(req, res, next) {
+	makeAPIRequest('https://api.spotify.com/v1/me/top/tracks', res);
+});
+
+router.get('/me/top/artists', function(req, res, next) {
+	makeAPIRequest('https://api.spotify.com/v1/me/top/artists', res);
 });
 
 router.get('/search/:category/:resource', function(req, res, next) {

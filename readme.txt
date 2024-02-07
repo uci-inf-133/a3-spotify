@@ -4,11 +4,11 @@
 
 */20
 - */2 Communicating with the webserver
-- */3 Populating information about the user
-- */4 Populating the search component
-- */5 Artist page
-- */3 Album page
-- */3 Track page
+- */5 Spotify browser home page
+- */4 Spotify browser artist page
+- */3 Spotify browser album page
+- */3 Spotify browser track page
+- */3 Spotify browser custom page
 
 
 2. How long, in hours, did it take you to complete this assignment?
