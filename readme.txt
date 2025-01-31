@@ -2,13 +2,13 @@
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
-*/20
-- */2 Communicating with the webserver
-- */5 Spotify browser home page
-- */4 Spotify browser artist page
-- */3 Spotify browser album page
-- */3 Spotify browser track page
-- */3 Spotify browser custom page
+*/10
+- */1 Communicating with the webserver
+- */1 Populating information about the user
+- */3 Populating the search component
+- */2 Artist page
+- */1.5 Album page
+- */1.5 Track page
 
 
 2. How long, in hours, did it take you to complete this assignment?

@@ -62,54 +62,41 @@ function makeAPIRequest(url, res) {
 					});
 				});
 			} else {
-				console.log("THEN");
 				console.log(response);
 				res.status(response.status).end();
 			}
 			return null;
 		}
 	}).then(json => {
-		console.log("then then");
 		res.json(json);
 	}).catch(err => {
-		console.log("Catch");
 		console.error(err);
 	});
 }
-
 
 router.get('*', function(req, res, next) {
 	if(!loadedFiles) {
 		//This chains two promises together. First, client_secret.json will be read and parsed. Once it completes, tokens.json will be read and parsed.
 		//Promise.all() could be used to conduct these two file reads asynchronously, which is more efficient.
 		fs.readFile('client_secret.json', (err, data) => {
-			if(err){
-				console.log(err + "\n\nHave you created your tokens and client_secret files yet?")
-			}else{
-				data = JSON.parse(data);
-				my_client_id = data.client_id;
-				my_client_secret = data.client_secret;
-				
-				fs.readFile('tokens.json', (err, data) => {
-					data = JSON.parse(data);
-					access_token = data.access_token;
-					refresh_token = data.refresh_token;
-					next();
-				});
-			}
-		})
-	} else {
+			data = JSON.parse(data);
+			my_client_id = data.client_id;
+			my_client_secret = data.client_secret;
+			fs.readFile('tokens.json', (err, data) => {
+			data = JSON.parse(data);
+			access_token = data.access_token;
+			refresh_token = data.refresh_token;
+			next();
+			});
+		});
+	}
+	else {
 		next();
 	}
 });
 
-router.get('/', function(req, res, next) {
-	res.writeHead(200);
-	res.end("Proxy Server is Running!, visit localhost:4200 to view your web app.");
-});
-
 router.get('/login', function(req, res, next) {
-	var scopes = 'user-read-private user-read-email user-top-read';
+	var scopes = 'user-read-private user-read-email';
 	res.redirect('https://accounts.spotify.com/authorize' +
 	  '?response_type=code' +
 	  '&client_id=' + my_client_id +
@@ -156,14 +143,6 @@ router.get('/me', function(req, res, next) {
 	makeAPIRequest('https://api.spotify.com/v1/me', res);
 });
 
-router.get('/me/top/tracks', function(req, res, next) {
-	makeAPIRequest('https://api.spotify.com/v1/me/top/tracks', res);
-});
-
-router.get('/me/top/artists', function(req, res, next) {
-	makeAPIRequest('https://api.spotify.com/v1/me/top/artists', res);
-});
-
 router.get('/search/:category/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 	var category = req.params.category;
@@ -176,11 +155,6 @@ router.get('/search/:category/:resource', function(req, res, next) {
 router.get('/artist/:id', function(req, res, next) {
 	var id = req.params.id;
 	makeAPIRequest('https://api.spotify.com/v1/artists/' + id, res);
-});
-
-router.get('/artist-related-artists/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest('https://api.spotify.com/v1/artists/' + id + '/related-artists', res);
 });
 
 router.get('/artist-albums/:id', function(req, res, next) {
@@ -206,11 +180,6 @@ router.get('/album-tracks/:id', function(req, res, next) {
 router.get('/track/:id', function(req, res, next) {
 	var id = req.params.id;
 	makeAPIRequest('https://api.spotify.com/v1/tracks/' + id, res);
-});
-
-router.get('/track-audio-features/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest('https://api.spotify.com/v1/audio-features/' + id, res);
 });
 
 module.exports = router;
