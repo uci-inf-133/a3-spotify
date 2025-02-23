@@ -13,7 +13,6 @@ import { AlbumData } from '../../data/album-data';
 export class ArtistPageComponent implements OnInit {
 	artistId:string;
 	artist:ArtistData;
-	relatedArtists:ArtistData[];
 	topTracks:TrackData[];
 	albums:AlbumData[];
 
