@@ -24,8 +24,8 @@ export class TrackData extends ResourceData {
 
 	//Return duration_ms in X:XX form (and drop ms component)
 	get durationStr() {
-		var minutes:number = this.duration_ms / 60000; //60 sec/min * 100ms/sec
-		var seconds:number = (this.duration_ms) / 1000 % 60; // 100ms/sec, get remainder
-		return minutes.toFixed(0) + ':' + seconds.toFixed(0).padStart(2, '0');
+		var minutes:number = Math.trunc(this.duration_ms / 60000); //60 sec/min * 100ms/sec
+		var seconds:number = Math.trunc((this.duration_ms) / 1000 % 60); // 100ms/sec, get remainder
+		return minutes.toString() + ':' + seconds.toString().padStart(2, '0');
 	}
 }
