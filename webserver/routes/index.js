@@ -7,7 +7,7 @@ var fs = require('fs');
 var loadedFiles = false;
 
 //Make sure to set the redirect URI in the Spotify app you create!
-var redirect_uri = 'https://localhost:8888/callback';
+var redirect_uri = 'http://127.0.0.1:8888/callback';
 var my_client_id = null;
 var my_client_secret = null;
 

@@ -11,7 +11,7 @@ import { ProfileData } from '../data/profile-data';
   providedIn: 'root'
 })
 export class SpotifyService {
-	expressBaseUrl:string = 'https://localhost:8888';
+	expressBaseUrl:string = 'http://127.0.0.1:8888';
 
   constructor(private http:HttpClient) { }
 
